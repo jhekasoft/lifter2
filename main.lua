@@ -20,6 +20,34 @@ end
 --	end
 --end;
 
+stead.list_add = function(self, name, pos)
+    local nam = name
+    if stead.initialized then
+        nam = stead.ref(name);
+    end
+    if not nam then
+        error ("Add wrong object to list: "..tostring(name), 2);
+    end
+    if self:look(nam) then
+        return nil
+    end
+    self.__modified__ = true;
+    if isObject(stead.deref(nam)) then
+        nam._dynamic_type = true
+    end
+    if tonumber(pos) then
+        pos = tonumber(pos)
+        if pos <= #self then
+            stead.table.insert(self, pos, nam);
+        else
+            self[pos] = nam; -- for spare lists
+        end
+    else
+        stead.table.insert(self, nam);
+    end
+    return true
+end;
+
 function music(v, n)
 	return function()
 		set_music(v, n)

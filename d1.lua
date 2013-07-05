@@ -162,8 +162,8 @@ m_phonebook = obj {
 	nam = 'телефонная книга',
 	dsc = 'Меню:^{Телефонная книга}^',
 	act = function()
-		objs('mobil_tel_in'):add('phonebook');
-		--objs('mobil_tel_in'):add('phonebook', 10);
+		--objs('mobil_tel_in'):add('phonebook');
+		objs('mobil_tel_in'):add('phonebook', 10);
 		objs('mobil_tel_in'):del('memo');
 		objs('mobil_tel_in'):del('photo');
 		return 'Телефонная книга';
@@ -182,8 +182,8 @@ m_memo = obj {
 	nam = 'заметки',
 	dsc = '{Заметки}^',
 	act = function()
-		objs('mobil_tel_in'):add('memo');
-		--objs('mobil_tel_in'):add('memo', 10);
+		--objs('mobil_tel_in'):add('memo');
+		objs('mobil_tel_in'):add('memo', 10);
 		objs('mobil_tel_in'):del('phonebook');
 		objs('mobil_tel_in'):del('photo');
 		return 'Заметки';
@@ -220,8 +220,8 @@ m_photo = obj {
 	nam = 'снимки',
 	dsc = '{Снимки}',
 	act = function()
-		objs('mobil_tel_in'):add('photo');
-		--objs('mobil_tel_in'):add('photo', 10);
+		--objs('mobil_tel_in'):add('photo');
+		objs('mobil_tel_in'):add('photo', 10);
 		objs('mobil_tel_in'):del('phonebook');
 		objs('mobil_tel_in'):del('memo');
 		return 'Снимки';
@@ -370,8 +370,8 @@ morning = room {
 	obj = {vway('Продолжить', '{Продолжить}', 'd73level2')},
 	enter = music('snd/yard1.ogg'),
 	exit = function()
-		objs('mobil_tel_in'):add('exit_tel');
-		--objs('mobil_tel_in'):add('exit_tel', 20);
+		--objs('mobil_tel_in'):add('exit_tel');
+		objs('mobil_tel_in'):add('exit_tel', 20);
 		inv():add('home_key');
 		inv():add('mobil_tel');
 		--газета в ящике
