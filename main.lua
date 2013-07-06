@@ -48,6 +48,22 @@ stead.list_add = function(self, name, pos)
     return true
 end;
 
+stead.list_del = function(self, name)
+    local v,n
+    v, n = self:srch(name);
+    if n == nil then
+        return nil;
+    end
+    self.__modified__ = true
+    if n <= #self then
+        v = stead.table.remove(self, n);
+    else
+        v = self[n];
+        self[n] = nil -- for spare lists
+    end
+    return v
+end;
+
 function music(v, n)
 	return function()
 		set_music(v, n)
