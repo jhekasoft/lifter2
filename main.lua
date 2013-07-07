@@ -20,48 +20,51 @@ end
 --	end
 --end;
 
-stead.list_add = function(self, name, pos)
-    local nam = name
-    if stead.initialized then
-        nam = stead.ref(name);
-    end
-    if not nam then
-        error ("Add wrong object to list: "..tostring(name), 2);
-    end
-    if self:look(nam) then
-        return nil
-    end
-    self.__modified__ = true;
-    if isObject(stead.deref(nam)) then
-        nam._dynamic_type = true
-    end
-    if tonumber(pos) then
-        pos = tonumber(pos)
-        if pos <= #self then
-            stead.table.insert(self, pos, nam);
-        else
-            self[pos] = nam; -- for spare lists
-        end
-    else
-        stead.table.insert(self, nam);
-    end
-    return true
-end;
+if stead.version < "1.9.1" then
+	print 'Old version of INSTEAD. Functions stead.list_add() and stead.list_del() was overrided.';
+	stead.list_add = function(self, name, pos)
+		local nam = name
+		if stead.initialized then
+			nam = stead.ref(name);
+		end
+		if not nam then
+			error ("Add wrong object to list: "..tostring(name), 2);
+		end
+		if self:look(nam) then
+			return nil
+		end
+		self.__modified__ = true;
+		if isObject(stead.deref(nam)) then
+			nam._dynamic_type = true
+		end
+		if tonumber(pos) then
+			pos = tonumber(pos)
+			if pos <= #self then
+				stead.table.insert(self, pos, nam);
+			else
+				self[pos] = nam; -- for spare lists
+			end
+		else
+			stead.table.insert(self, nam);
+		end
+		return true
+	end;
 
-stead.list_del = function(self, name)
-    local v,n
-    v, n = self:srch(name);
-    if n == nil then
-        return nil;
-    end
-    self.__modified__ = true
-    if n <= #self then
-        v = stead.table.remove(self, n);
-    else
-        v = self[n];
-        self[n] = nil -- for spare lists
-    end
-    return v
+	stead.list_del = function(self, name)
+		local v,n
+		v, n = self:srch(name);
+		if n == nil then
+			return nil;
+		end
+		self.__modified__ = true
+		if n <= #self then
+			v = stead.table.remove(self, n);
+		else
+			v = self[n];
+			self[n] = nil -- for spare lists
+		end
+		return v
+	end;
 end;
 
 function music(v, n)
